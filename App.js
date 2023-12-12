@@ -11,7 +11,6 @@ import {
   responsiveHeight,
   responsiveWidth,
   responsiveFontSize,
-  responsiveScreenFontSize
 } from "react-native-responsive-dimensions";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -31,11 +30,7 @@ const LoginScreen = ({ navigation }) => {
       try {
         await Auth.signIn(username, password);
         Alert.alert('Correcto', 'Inicio de sesión exitoso');
-        
-        // Obtén el usuario autenticado después del inicio de sesión
         const authenticatedUser = await Auth.currentAuthenticatedUser();
-        
-        // Navega a la pantalla 'Home' con la información del usuario
         navigation.navigate('Home', { username: authenticatedUser.username });
   
       } catch (error) {
@@ -48,21 +43,14 @@ const LoginScreen = ({ navigation }) => {
   useEffect(() => {
     const handleLogin = async () => {
       try {
-        const authenticatedUser = await Auth.currentAuthenticatedUser();
-        
-        // Si el usuario ya está autenticado, navega a la pantalla 'Home'
+        const authenticatedUser = await Auth.currentAuthenticatedUser();        
         navigation.navigate('Home', { username: authenticatedUser.username });
     
       } catch (notAuthenticatedError) {
-        // El usuario no está autenticado, intenta el inicio de sesión
         try {
           await Auth.signIn(username, password);
           Alert.alert('Correcto', 'Inicio de sesión exitoso');
-          
-          // Obtén el usuario autenticado después del inicio de sesión
           const authenticatedUser = await Auth.currentAuthenticatedUser();
-          
-          // Navega a la pantalla 'Home' con la información del usuario
           navigation.navigate('Home', { username: authenticatedUser.username });
     
         } catch (error) {
@@ -256,7 +244,7 @@ const LoginScreen = ({ navigation }) => {
                   paddingTop:60,
                 }}>
 
-                  <Text style={styles.DesCitHoy}>Numaris R® 2024</Text>
+                  <Text style={styles.Numaris24}>Numaris R® 2024</Text>
 
 
                 </View>
@@ -292,10 +280,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  iconRight: {
-    color: "#009ed7",
-  },
-  DesCitHoy: {
+  Numaris24: {
     paddingTop: 15,
     fontSize: responsiveFontSize(1.6),
     color: "#FFFFFF",
@@ -309,14 +294,6 @@ const styles = StyleSheet.create({
   linearGradientTecnico: {
     height: responsiveHeight(100),
     width: responsiveWidth(100),
-  },
-  titutecnico: {
-    paddingTop: 5,
-    paddingLeft: 50,
-    fontSize: responsiveFontSize(2.4),
-    alignSelf: "center",
-    color: "white",
-    fontWeight: "bold",
   },
   linearGradientConsultar: {
     alignSelf: "center",
